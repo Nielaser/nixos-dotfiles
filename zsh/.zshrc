@@ -113,5 +113,4 @@ alias commands="cat cool"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR="/usr/bin/helix"
-export DIR="/home/lugryn/dotfiles"
-
+source "$HOME/.local/bin/scripts/wallpaper-selector.zsh"
