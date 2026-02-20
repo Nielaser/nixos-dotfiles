@@ -1,2 +1,4 @@
 #!/bin/bash
 matugen image "$(find ~/Wallpapers -type f | fzf --preview 'kitty +icat --transfer-mode=file --stdin=no --clear; kitty +icat --transfer-mode=file --stdin=no --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}' --preview-window 'up:50%:wrap')"
+
+#WIP#matugen image "$(find ~/Wallpapers -type f | fzf --preview ' chafa --format kitty --center on --clear -s ${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES} {}' --preview-window 'up:50%:wrap')"

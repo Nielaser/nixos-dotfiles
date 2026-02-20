@@ -1,0 +1,5 @@
+[MIME Cache]
+x-scheme-handler/itch=io.itch.itch.desktop;
+x-scheme-handler/itchio=io.itch.itch.desktop;
+x-scheme-handler/steam=steam-xwayland.desktop;
+x-scheme-handler/steamlink=steam-xwayland.desktop;

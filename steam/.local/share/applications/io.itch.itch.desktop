@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=itch
+TryExec=/home/lugryn/.itch/itch
+Exec=/home/lugryn/.itch/itch %U
+Icon=/home/lugryn/.itch/icon.png
+Terminal=false
+Categories=Game;
+MimeType=x-scheme-handler/itchio;x-scheme-handler/itch;
+X-GNOME-Autostart-enabled=true
+Comment=Install and play itch.io games easily
