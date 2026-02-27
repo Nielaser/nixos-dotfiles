@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.folows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -16,10 +16,10 @@
     in
    {
 
-      nixosConfiguration.default = nixpkgs.lib.nixosSystem {
-        extraSpecialArgs = {inherit inputs;}
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
         modules = [
-          /etc/nixos/configuration.nix
+          ./hosts/lugryn/configuration.nix
           inputs.home-manager.nixosModules.default
         ];
       };
