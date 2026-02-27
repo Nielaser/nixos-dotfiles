@@ -1,0 +1,38 @@
+{ config, pkgs, ... }:{
+home.packages = with pkgs; [
+    atool
+    httpie
+    hello
+    kitty
+    fuzzel
+    swww
+    xwayland-satellite
+    wiremix
+    bluetui
+    gophertube
+    yazi
+    superfile
+    nautilus
+    eza
+    zoxide
+    waybar
+    nerd-fonts.departure-mono
+    vesktop
+    uv
+    xclip
+    wl-clipboard
+    aspell
+    aspellDicts.fr
+    aspellDicts.en
+    yt-dlp
+    mpv
+    libsecret
+    dbus
+    discordo
+    protonup-ng
+    lutris
+    heroic
+    bottles
+    sl
+     ];
+}

@@ -1,11 +1,16 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ... }:{
 
-{
+  imports = [
+    ./hyprland/hyprland.nix
+    ../pkgs/pkgs.nix
+  ];
+  
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "lugryn";
   home.homeDirectory = "/home/lugryn";
-    
+
+
     programs.git = {
     enable = true;
     settings.user.name = "Nielaser";
@@ -37,7 +42,7 @@ sessionVariables = {
     '';
 shellAliases = {
 ls = "exa -l";
-update = "sudo nixos-rebuild switch --flake /home/lugryn/dotfiles/.";
+update = "sudo nixos-rebuild switch --flake /home/lugryn/dotfiles/nixos/.";
 };
 history.size = 10000;
   oh-my-zsh = {
@@ -47,26 +52,16 @@ history.size = 10000;
   };
 };
 
- home.packages = with pkgs; [
-    atool
-    httpie
-    hello
-    kitty
-    fuzzel
-    swww
-    firefox
-    xwayland-satellite
-    wiremix
-    bluetui
-    gophertube
-    yazi
-    superfile
-    nautilus
-    eza
-    zoxide
-    waybar
-    nerd-fonts.departure-mono
- ];
+
+
+ 
+
+  home.sessionVariables = {
+      STEAM_EXTRA_COMPAT_TOOLS_PATH =
+        "\${HOME}/.steam/root/compatibilitytools.d";
+    };
+
+
 
  home.file = {
  };

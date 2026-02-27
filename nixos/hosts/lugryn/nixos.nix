@@ -1,21 +1,16 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, inputs,  ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
+  imports = [ 
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
-    ];
+      ];
 
 home-manager = {
   useUserPackages = true;
   useGlobalPkgs = true;
   backupFileExtension = "backup"; # This will rename .zshrc to .zshrc.backup
-  users.lugryn = import ./home.nix;
+  users.lugryn = import ../../home/home.nix;
 };
 
 nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -34,19 +29,21 @@ boot.loader.systemd-boot.enable = true;
 boot.loader.efi.canTouchEfiVariables = true;
 
 networking.hostName = "nixos"; # Define your hostname.
-# networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-services.xserver = {
+services = {
   displayManager.gdm.enable = true;
+  desktopManager.gnome.enable = true;
+  gnome.core-apps.enable = false;
+  gnome.core-developer-tools.enable = false;
+  gnome.games.enable = false;
 };
 
-services.dunst.enable = true;
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
 
-  # Enable networking
-  #networking.networkmanager.enable = true;
+services.dunst.enable = true;
+
+  networking.wireless.enable = false;
+  networking.networkmanager.enable = false;
   networking.wireless.iwd.enable = true;
   networking.wireless.iwd.settings = {
     Ipv6 = {
@@ -84,21 +81,12 @@ services.dunst.enable = true;
   # Configure console keymap
   console.keyMap = "fr";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  #users.users.lugryn = {
-  #  isNormalUser = true;
-  #  description = "lugryn";
-  #  extraGroups = [ "networkmanager" "wheel" ];
-  #  packages = with pkgs; [];
-  #};
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
+
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   wget
 	helix
 	neovim
@@ -108,6 +96,16 @@ services.dunst.enable = true;
 	zsh
 	fastfetch
 	brightnessctl
+  gcc
+  cmake
+  pkg-config
+  libffi
+  cargo 
+  rustc
+  go
+  python3
+  inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+
   ];
 
 programs.steam = {
@@ -120,6 +118,7 @@ programs.steam = {
 programs.zsh.enable = true;
 services.flatpak.enable = true;
 programs.hyprland.enable = true;
+programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 programs.niri.enable = true;
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
