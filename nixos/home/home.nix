@@ -1,12 +1,16 @@
-{ config, pkgs, ... }:
 {
-
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./hyprland/hyprland.nix
     ../pkgs/pkgs.nix
     ./kitty/kitty.nix
- #   ./waybar/waybar.nix
-    ];
+    ./waybar/waybar.nix
+    ./niri/niri.nix
+  ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -36,7 +40,6 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     sessionVariables = {
-      EDITOR = "nvim";
       MANPAGER = "most";
     };
     initContent = ''
@@ -58,7 +61,7 @@
       theme = "darkblood";
     };
   };
-  
+
   home.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATH = "\${HOME}/.steam/root/compatibilitytools.d";
   };

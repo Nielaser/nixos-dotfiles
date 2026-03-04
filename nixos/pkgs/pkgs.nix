@@ -18,6 +18,7 @@
     zoxide
     waybar
     nerd-fonts.departure-mono
+    nerd-fonts.gohufont
     vesktop
     uv
     xclip
@@ -45,11 +46,14 @@
     grim
     grimblast
     wlogout
-    neovim
     cava
     cmatrix
     imagemagick
-    vim
+    neovim
     appflowy
+    deezer-enhanced
+    stow
+    r2modman
+    wlr-which-key
     ];
 }

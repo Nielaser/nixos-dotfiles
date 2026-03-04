@@ -15,6 +15,9 @@
     useUserPackages = true;
     useGlobalPkgs = true;
     backupFileExtension = "backup";
+
+    extraSpecialArgs = { inherit inputs; };
+
     users.lugryn = import ../../home/home.nix;
   };
 
@@ -114,7 +117,9 @@
     alejandra
     nixd
     base16-schemes
+    nerd-fonts.caskaydia-mono
     solaar
+    electron
   ];
 
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
@@ -125,12 +130,38 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
- 
+services.dbus.enable = true;
+services.dbus.packages = [ 
+  pkgs.xdg-desktop-portal-hyprland
+  pkgs.xdg-desktop-portal-gtk 
+];
+xdg.mime.defaultApplications = {
+  "text/html" = "zen-browser.desktop"; # or google-chrome.desktop, etc.
+  "x-scheme-handler/http" = "zen-browser.desktop";
+  "x-scheme-handler/https" = "zen-browser.desktop";
+};
+
+xdg.portal = {
+  enable = true;
+  extraPortals = [ 
+     pkgs.xdg-desktop-portal-gtk 
+  ];
+  # This tells the portal exactly which backend to use for what
+  config = {
+    common = {
+      default = [ "hyprland" "gtk" ];
+    };
+    # Specifically for Hyprland sessions
+    hyprland = {
+      default = [ "hyprland" "gtk" ];
+      "org.freedesktop.portal.OpenURI" = "gtk"; # Force links to use the GTK portal
+    };
+  };
+};
   programs.zsh.enable = true;
   services.flatpak.enable = true;
   programs.hyprland.enable = true;
   programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-  programs.niri.enable = true;
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

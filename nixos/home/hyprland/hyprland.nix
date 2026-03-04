@@ -2,10 +2,11 @@
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
 
-    monitor = ", 1920x1200, auto, 1";
+    monitor = ", prefered, auto, 2";
     exec-once = [
       "swww-daemon"
-      "waybar -c ~/.config/waybar/config-hypr.jsonc"
+      "waybar"
+      "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
     ];
 
     env = [
