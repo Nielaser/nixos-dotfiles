@@ -37,7 +37,7 @@
 
       "group/Utilities" = {
         "orientation" = "horizontal";
-        "modules" = ["custom/openbracket" "custom/arch" "idle_inhibitor" "custom/closebracket"];
+        modules = ["custom/openbracket" "custom/arch" "idle_inhibitor" "custom/closebracket"];
       };
       "custom/arch" = {
         "format" = "󰣇";
@@ -47,7 +47,7 @@
 
       "group/workspaces" = {
         "orientation" = "horizontal";
-        "modules" = ["custom/openbracket" "hyprland/workspaces" "custom/closebracket"];
+        modules = ["custom/openbracket" "hyprland/workspaces" "custom/closebracket"];
       };
 
       "hyprland/workspaces" = {
@@ -95,7 +95,7 @@
 
       "group/windows" = {
         "orientation" = "horizontal";
-        "modules" = ["custom/openbracket" "hyprland/window" "custom/closebracket"];
+        modules = ["custom/openbracket" "hyprland/window" "custom/closebracket"];
       };
 
       "hyprland/window" = {
@@ -114,7 +114,7 @@
 
       "group/cpuram" = {
         "orientation" = "horizontal";
-        "modules" = [
+        modules = [
           "custom/openbracket"
           "cpu"
           "custom/split"
@@ -137,7 +137,7 @@
 
       "group/brightvol" = {
         "orientation" = "horizontal";
-        "modules" = [
+        modules = [
           "custom/openbracket"
           "backlight"
           "custom/split"
@@ -168,7 +168,7 @@
 
       "group/system" = {
         "orientation" = "horizontal";
-        "modules" = [
+        modules = [
           "custom/openbracket"
           "clock"
           "custom/split"
@@ -213,7 +213,7 @@
 
       "group/clock" = {
         "orientation" = "horizontal";
-        "modules" = [
+        modules = [
           "custom/openbracket"
           "clock"
           "custom/closebracket"
