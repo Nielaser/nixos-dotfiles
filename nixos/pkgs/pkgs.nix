@@ -61,5 +61,6 @@
     stow
     r2modman
     wlr-which-key
+    whatsapp-electron
     ];
 }
