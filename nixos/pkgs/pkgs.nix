@@ -2,6 +2,9 @@
 {
   home.packages = with pkgs; [
     localsend
+    vivaldi
+    itch
+    libnotify
     ckan
     kdePackages.filelight
     kdePackages.kdeconnect-kde
@@ -16,11 +19,9 @@
     wev
     atool
     ani-cli
-    itch
     httpie
     hello
     kitty
-    fuzzel
     swww
     xwayland-satellite
     wiremix
@@ -70,5 +71,6 @@
     stow
     r2modman
     wlr-which-key
+
     ];
 }

@@ -65,7 +65,6 @@
     gnome-user-docs
   ];
 
-  services.dunst.enable = true;
 
   networking.wireless.enable = false;
   networking.networkmanager.enable = false;
@@ -130,8 +129,46 @@
     solaar
     electron
     playerctl
-    wine-staging
-    winetricks
+    pkg-config
+    openssl
+    zlib
+    glib
+    stdenv.cc.cc
+    libxml2
+    libx11
+    zenity
+    polkit_gnome
+    wineWow64Packages.stable
+  ];
+security.polkit.enable = true;
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+  description = "polkit-gnome-authentication-agent-1";
+  wantedBy = ["graphical-session.target"];
+  wants = ["graphical-session.target"];
+  after = ["graphical-session.target"];
+  serviceConfig = {
+    Type = "simple";
+    ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    Restart = "on-failure";
+    RestartSec = 1;
+    TimeoutStopSec = 10;
+  };
+};
+
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    zlib
+    openssl
+    glib
+    stdenv.cc.cc
+    libtiff
+    libjpeg
+    libpng
+    libffi
+    fontconfig
+    freetype
+    xorg.libX11
   ];
 
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
