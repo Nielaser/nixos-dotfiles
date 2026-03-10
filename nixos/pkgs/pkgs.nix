@@ -4,6 +4,15 @@
     localsend
     ckan
     kdePackages.filelight
+    kdePackages.kdeconnect-kde
+    starship
+    grc
+    fishPlugins.done
+    fishPlugins.fzf-fish
+    fishPlugins.forgit
+    fishPlugins.hydro
+    fzf
+    fishPlugins.grc
     wev
     atool
     ani-cli

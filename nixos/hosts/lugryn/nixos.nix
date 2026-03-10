@@ -27,7 +27,7 @@
   ];
   
   environment = {
-    shells = [ pkgs.zsh ];
+    shells = [ pkgs.fish ];
     variables = {
       EDITOR = "vim";
       SYSTEMD_EDITOR = "vim";
@@ -43,7 +43,7 @@
       "wheel"
     ];
     home = "/home/lugryn";
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 
   # Bootloader.
@@ -172,7 +172,7 @@ xdg.portal = {
 };
 
   programs.niri.enable = true;
-  programs.zsh.enable = true;
+  programs.fish.enable = true;
   services.flatpak.enable = true;
   programs.hyprland.enable = true;
   programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;

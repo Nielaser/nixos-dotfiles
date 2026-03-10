@@ -11,6 +11,9 @@
     ./waybar/waybar.nix
     ./waybar/style.nix
     ./niri/niri.nix
+    ./dunst/dunst.nix
+    ./fuzzel/fuzzel.nix
+    ./fish/fish.nix
   ];
 
   home.file = {
@@ -43,7 +46,7 @@
   };
 
   programs.zsh = {
-    enable = true;
+    enable = false;
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
@@ -71,6 +74,7 @@
       theme = "darkblood";
     };
   };
+
 
   home.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATH = "\${HOME}/.steam/root/compatibilitytools.d";
