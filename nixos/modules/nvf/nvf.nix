@@ -18,6 +18,14 @@
         viAlias = true;
         vimAlias = true;
 
+
+        
+        maps.normal = {
+          "^i" = {
+            action = "lua vim.diagnostic.open_float()";
+            desc = "Show line diagnostic";
+          };
+        };
         options = {
           tabstop = 2;
           softtabstop = 2;
@@ -27,10 +35,12 @@
         statusline.lualine.enable = true;
         telescope.enable = true;
         autocomplete.nvim-cmp.enable = true;
-
+        lsp = {
+          enable = true;
+        };
         languages = {
-          enableLSP = true;
           enableTreesitter = true;
+          enableFormat = true;
 
           nix.enable = true;
           ts.enable = true;
@@ -39,6 +49,7 @@
           lua.enable = true;
           json.enable = true;
           toml.enable = true;
+          qml.enable = true;
         };
       };
     };

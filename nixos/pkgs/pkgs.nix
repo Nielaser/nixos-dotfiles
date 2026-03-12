@@ -1,9 +1,15 @@
-{ config, pkgs, inputs, ... }:
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+{
+
   home.packages = with pkgs; [
     localsend
     inputs.quickshell.packages.x86_64-linux.default
-    swayfx
+    vscode
     vivaldi
     itch
     libnotify
@@ -59,8 +65,8 @@
     bottles
     sl
     fastfetch
-    helix
     psmisc
+    hyprpicker
     btop
     iamb
     impala
@@ -78,5 +84,6 @@
     r2modman
     wlr-which-key
     whatsapp-electron
-    ];
+    mariadb
+  ];
 }

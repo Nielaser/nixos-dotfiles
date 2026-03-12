@@ -58,26 +58,26 @@
         highlight = "#${config.lib.stylix.colors.base01}";
       };
 
-      #urgency_low = {
-        #timeout = 3;
+      urgency_low = {
+        timeout = 3;
         #background = "#${config.lib.stylix.colors.base00}";
         #foreground = "#${config.lib.stylix.colors.base05}";
         #highlight = "#${config.lib.stylix.colors.base06}";
-        #};
+        };
 
-      #urgency_normal = {
-        #timeout = 6;
+      urgency_normal = {
+        timeout = 6;
         #background = "#${config.lib.stylix.colors.base00}";
         #foreground = "#${config.lib.stylix.colors.base05}";
         #highlight = "#${config.lib.stylix.colors.base06}";
-        #};
+        };
 
-      #urgency_critical = {
-        #timeout = 12;
+      urgency_critical = {
+        timeout = 12;
         #background = "#${config.lib.stylix.colors.base00}";
         #foreground = "#${config.lib.stylix.colors.base05}";
         #highlight = "#${config.lib.stylix.colors.base06}";
-        #};
+        };
     };
   };
 }

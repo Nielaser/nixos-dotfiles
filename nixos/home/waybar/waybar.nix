@@ -47,7 +47,7 @@
 
       "group/workspaces" = {
         "orientation" = "horizontal";
-        "modules" = ["custom/openbracket" "niri/workspaces" "custom/closebracket"];
+        "modules" = ["custom/openbracket" "hyprland/workspaces" "custom/closebracket"];
       };
 
       "hyprland/workspaces" = {
@@ -95,7 +95,7 @@
 
       "group/windows" = {
         "orientation" = "horizontal";
-        "modules" = ["custom/openbracket" "niri/window" "custom/closebracket"];
+        "modules" = ["custom/openbracket" "hyprland/window" "custom/closebracket"];
       };
 
       "hyprland/window" = {

@@ -35,16 +35,33 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #niri 
+    #niri
     niri = {
       url = "github:sodiboo/niri-flake";
-      };
+    };
     #gruvbox-wallpapers
     gruvbox-wallpapers.url = "github:AngelJumbo/gruvbox-wallpapers";
-    
+
     #Quickshell
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    #caelestia-shell
+    #caelestia-shell = {
+    # url = "github:caelestia-dots/shell";
+    #inputs.nixpkgs.follows = "nixpkgs";
+    #};
+
+    #noctalia
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.noctalia-qs.follows = "noctalia-qs";
+    };
+    noctalia-qs = {
+      url = "github:noctalia-dev/noctalia-qs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -67,12 +84,11 @@
     in
     {
       packages."x86_64-linux".default =
-            (inputs.nvf.lib.neovimConfiguration {
-              pkgs = nixpkgs.legacyPackages.x86_64-linux;
-              modules = [ ./modules/nvf/nvf.nix ];
-            }).neovim;
-        
-      
+        (inputs.nvf.lib.neovimConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          modules = [ ./modules/nvf/nvf.nix ];
+        }).neovim;
+
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [

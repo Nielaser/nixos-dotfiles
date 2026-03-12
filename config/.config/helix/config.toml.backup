@@ -1,0 +1,25 @@
+theme = "matugen"
+[editor]
+scrolloff = 5
+mouse = true
+middle-click-paste = true
+shell = ["sh", "-c"]
+line-number = "relative"
+continue-comments = true
+auto-completion = true
+path-completion = true
+auto-format = true
+bufferline = "multiple"
+
+
+[editor.cursor-shape]
+normal = "block"
+insert = "bar"
+select = "block"
+
+[keys.normal]
+C-s = ":w"
+
+[keys.insert]
+C-s = ":w"
+

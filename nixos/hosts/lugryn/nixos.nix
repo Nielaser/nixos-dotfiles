@@ -3,13 +3,14 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
     ../../stylix/stylix.nix
     ../../modules/nvf/nvf.nix
-    ];
+  ];
 
   home-manager = {
     useUserPackages = true;
@@ -25,7 +26,7 @@
     "nix-command"
     "flakes"
   ];
-  
+
   environment = {
     shells = [ pkgs.fish ];
     variables = {
@@ -35,12 +36,18 @@
     };
   };
 
+  security.polkit.enable = true;
+
   users.users.lugryn = {
     isNormalUser = true;
     description = "lugryn";
     extraGroups = [
       "networkmanager"
       "wheel"
+      "input"
+      "uaccess"
+      "video"
+      "plugdeb"
     ];
     home = "/home/lugryn";
     shell = pkgs.fish;
@@ -58,6 +65,8 @@
     gnome.core-apps.enable = false;
     gnome.core-developer-tools.enable = false;
     gnome.games.enable = false;
+    tuned.enable = true;
+    upower.enable = true;
   };
 
   environment.gnome.excludePackages = with pkgs; [
@@ -65,9 +74,9 @@
     gnome-user-docs
   ];
 
-
   networking.wireless.enable = false;
   networking.networkmanager.enable = false;
+  networking.networkmanager.wifi.backend = "iwd";
   networking.wireless.iwd.enable = true;
   networking.wireless.iwd.settings = {
     Ipv6 = {
@@ -98,12 +107,14 @@
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "fr";
+    layout = "fr, us";
+    options = "grp:caps_toggle";
     variant = "";
   };
 
   # Configure console keymap
-  console.keyMap = "fr";
+  #console.keyMap = "fr";
+  console.useXkbConfig = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -121,7 +132,6 @@
     rustc
     go
     python3
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     alejandra
     nixd
     base16-schemes
@@ -129,6 +139,7 @@
     solaar
     electron
     playerctl
+    qt6.qtdeclarative
     pkg-config
     openssl
     zlib
@@ -139,22 +150,24 @@
     zenity
     polkit_gnome
     wineWow64Packages.stable
+    libratbag
+    piper
+    gamescope
   ];
-security.polkit.enable = true;
-  systemd.user.services.polkit-gnome-authentication-agent-1 = {
-  description = "polkit-gnome-authentication-agent-1";
-  wantedBy = ["graphical-session.target"];
-  wants = ["graphical-session.target"];
-  after = ["graphical-session.target"];
-  serviceConfig = {
-    Type = "simple";
-    ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-    Restart = "on-failure";
-    RestartSec = 1;
-    TimeoutStopSec = 10;
-  };
-};
 
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
@@ -168,10 +181,10 @@ security.polkit.enable = true;
     libffi
     fontconfig
     freetype
-    xorg.libX11
+    libx11
   ];
 
-  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   programs.steam = {
     enable = true;
@@ -179,40 +192,50 @@ security.polkit.enable = true;
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
-services.dbus.enable = true;
-services.dbus.packages = [ 
-  pkgs.xdg-desktop-portal-hyprland
-  pkgs.xdg-desktop-portal-gtk 
-];
-xdg.mime.defaultApplications = {
-  "text/html" = "zen-browser.desktop"; # or google-chrome.desktop, etc.
-  "x-scheme-handler/http" = "zen-browser.desktop";
-  "x-scheme-handler/https" = "zen-browser.desktop";
-};
-
-xdg.portal = {
-  enable = true;
-  extraPortals = [ 
-     pkgs.xdg-desktop-portal-gtk 
+  services.dbus.enable = true;
+  services.dbus.packages = [
+    pkgs.xdg-desktop-portal-hyprland
+    pkgs.xdg-desktop-portal-gtk
   ];
-  # This tells the portal exactly which backend to use for what
-  config = {
-    common = {
-      default = [ "hyprland" "gtk" ];
-    };
-    # Specifically for Hyprland sessions
-    hyprland = {
-      default = [ "hyprland" "gtk" ];
-      "org.freedesktop.portal.OpenURI" = "gtk"; # Force links to use the GTK portal
+  xdg.mime.defaultApplications = {
+    "text/html" = "vivaldi.desktop"; # or google-chrome.desktop, etc.
+    "x-scheme-handler/http" = "vivaldi.desktop";
+    "x-scheme-handler/https" = "vivaldi.desktop";
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    # This tells the portal exactly which backend to use for what
+    config = {
+      common = {
+        default = [
+          "hyprland"
+          "gtk"
+        ];
+      };
+      # Specifically for Hyprland sessions
+      hyprland = {
+        default = [
+          "hyprland"
+          "gtk"
+        ];
+        "org.freedesktop.portal.OpenURI" = "gtk"; # Force links to use the GTK portal
+      };
     };
   };
-};
 
   programs.niri.enable = true;
   programs.fish.enable = true;
   services.flatpak.enable = true;
   programs.hyprland.enable = true;
   programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+
+  services.hardware.openrgb.enable = true;
+  services.hardware.openrgb.package = pkgs.openrgb-with-all-plugins;
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

@@ -3,7 +3,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./hyprland/hyprland.nix
     ../pkgs/pkgs.nix
@@ -14,11 +15,16 @@
     ./dunst/dunst.nix
     ./fuzzel/fuzzel.nix
     ./fish/fish.nix
-    ./sway/sway.nix   
+    ./sway/sway.nix
+    ./helix/helix.nix
+    inputs.noctalia.homeModules.default
+    ./noctalia/noctalia.nix
+    #./caelestiashell/cealestia.nix
+    #inputs.caelestia-shell.homeManagerModules.default
   ];
 
   home.file = {
-      "Pictures/Wallpapers" = {
+    "Pictures/Wallpapers" = {
       source = inputs.gruvbox-wallpapers.packages."${pkgs.stdenv.hostPlatform.system}".default;
       recursive = true;
     };
@@ -31,9 +37,9 @@
 
   programs.git = {
     enable = true;
-    settings.user.name = "Nielaser";
-    settings.user.email = "canonville.niels@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "Nielaser";
+      user.email = "randommail@random";
       init.defaultBranch = "main";
     };
   };
@@ -75,7 +81,6 @@
       theme = "darkblood";
     };
   };
-
 
   home.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATH = "\${HOME}/.steam/root/compatibilitytools.d";

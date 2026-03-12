@@ -2,11 +2,12 @@
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
 
-    monitor = ", 1920x1200, auto, 1";
+    monitor = ", prefered, auto, 2.13";
     exec-once = [
-      "swww-daemon"
-      "waybar"
+      #"swww-daemon"
+      #"waybar"
       "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+      "noctalia-shell" # Only on nix !!
     ];
 
     env = [
@@ -16,14 +17,14 @@
 
     general = {
       gaps_in = 5;
-      gaps_out = 11;
-      border_size = 2;
+      gaps_out = 10;
+      border_size = 0;
 
       resize_on_border = false;
 
       allow_tearing = false;
 
-      #layout = "scrolling";
+      layout = "scrolling";
     };
 
     cursor = {
@@ -32,11 +33,11 @@
     };
 
     decoration = {
-      rounding = 0;
+      rounding = 20;
       rounding_power = 2;
 
       active_opacity = 1.0;
-      inactive_opacity = 0.8;
+      inactive_opacity = 0.9;
 
       shadow = {
         enabled = true;
@@ -46,7 +47,7 @@
 
       blur = {
         enabled = true;
-        size = 2;
+        size = 3;
         passes = 2;
         ignore_opacity = true;
 
@@ -105,7 +106,7 @@
       follow_mouse = 1;
       sensitivity = 1.9;
       repeat_rate = 50;
-      repeat_delay = 200;
+      repeat_delay = 300;
       touchpad = {
         natural_scroll = false;
       };
@@ -157,7 +158,6 @@
       "SUPER, code:18, workspace, 9"
       "SUPER, code:19, workspace, 10"
 
-
       #Move active window to ... workspace
       "SUPER SHIFT, code:10, movetoworkspace, 1"
       "SUPER SHIFT, code:11, movetoworkspace, 2"
@@ -169,7 +169,6 @@
       "SUPER SHIFT, code:17, movetoworkspace, 8"
       "SUPER SHIFT, code:18, movetoworkspace, 9"
       "SUPER SHIFT, code:19, movetoworkspace, 10"
-      
 
       #Scroll workspace
       "SUPER, mouse_up, workspace, e+1"
@@ -183,6 +182,7 @@
       "Super, F, layoutmsg, fit active"
 
       ", Print, exec, grimblast copy area"
+      "Super, Print, exec, hyprpicker -a"
     ];
 
     bindm = [
@@ -199,13 +199,13 @@
       ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
       ",XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+"
       ",XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-"
-      
+
       #workspaces
       "SUPER Ctrl, code:112, movetoworkspace, e-1"
       "SUPER Ctrl, code:117, movetoworkspace, e+1"
       "Super, code:117, workspace, e+1"
       "Super, code:112, workspace, e-1"
-      
+
       #resize window
       "Super Ctrl, right, resizeactive, 30 0"
       "Super Ctrl, left, resizeactive, -30 0"
@@ -220,10 +220,7 @@
       "Super Alt, up, moveactive, 0 -30"
       "Super Alt, down, moveactive, 0 30"
 
-
     ];
-
-   
 
     bindl = [
       #Require playerctl

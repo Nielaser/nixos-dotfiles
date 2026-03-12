@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Heartopia
+Comment=Play this game on Steam
+Exec=steam steam://rungameid/4025700
+Icon=steam_icon_4025700
+Terminal=false
+Type=Application
+Categories=Game;
