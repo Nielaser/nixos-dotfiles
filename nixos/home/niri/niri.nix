@@ -3,7 +3,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.niri.homeModules.niri
   ];
@@ -17,6 +18,7 @@
       spawn-at-startup = [
         {argv = ["waybar"];}
         {sh = "swww-daemon";}
+        #       { sh = "noctalia-shell"; }
       ];
 
       workspaces = {
@@ -51,7 +53,7 @@
 
       layout = {
         border = {
-          enable = true;
+          enable = false;
           width = 2;
           active.color = "#${config.lib.stylix.colors.base0D}";
           inactive.color = "#${config.lib.stylix.colors.base01}";
@@ -63,7 +65,7 @@
         };
 
         default-column-width = {
-          proportion = 0.5;
+          proportion = 0.6;
         };
 
         gaps = 8;
@@ -71,7 +73,7 @@
 
       window-rules = [
         {
-          matches = [{title = "ConfigTUI";}];
+          matches = [ { title = "ConfigTUI"; } ];
           default-column-width.fixed = 800;
           default-window-height.fixed = 500;
           open-floating = true;
@@ -79,7 +81,17 @@
         }
 
         {
-          matches = [{title = "Picture in picture";}];
+          geometry-corner-radius = {
+            bottom-left = 10.0;
+            bottom-right = 10.0;
+            top-left = 10.0;
+            top-right = 10.0;
+          };
+          clip-to-geometry = true;
+        }
+
+        {
+          matches = [ { title = "Picture in picture"; } ];
           open-floating = true;
           open-focused = false;
         }
@@ -88,10 +100,12 @@
       binds = with config.lib.niri.actions; {
         "Mod+Shift+Colon".action = show-hotkey-overlay;
         "Mod+Return".action.spawn = "kitty";
-        "Mod+Space".action.spawn = "fuzzel";
+        #"Mod+Space".action.spawn = "fuzzel";
+        "Mod+Space".action.spawn-sh = "noctalia-shell ipc call launcher toggle"; # noctali only
         "Mod+Alt+L".action.spawn = "swaylock";
 
-        "Mod+Shift+W".action.spawn-sh = "kitty --title ConfigTUI -e wallselector";
+        #"Mod+Shift+W".action.spawn-sh = "kitty --title ConfigTUI -e wallselector";
+        "Mod+SHift+W".action.spawn-sh = "noctalia-shell ipc call wallpaper toggle";
         "Mod+E".action.spawn-sh = "kitty -e yazi";
         "Mod+Alt+E".action.spawn = "nautilus";
         "Mod+D".action.spawn-sh = "kitty -e discordo";
@@ -190,7 +204,7 @@
         "Mod+Underscore".action.focus-workspace = 8;
         "Mod+Ccedilla".action.focus-workspace = 9;
         "Mod+Ctrl+Ampersand".action.move-column-to-workspace = 1;
-        "Mod+Ctrl+2" .action.move-column-to-workspace = 2;
+        "Mod+Ctrl+2".action.move-column-to-workspace = 2;
         "Mod+Ctrl+Quotedbl".action.move-column-to-workspace = 3;
         "Mod+Ctrl+Apostrophe".action.move-column-to-workspace = 4;
         "Mod+Ctrl+ParenLeft".action.move-column-to-workspace = 5;
@@ -229,8 +243,12 @@
 
         "Mod+W".action = toggle-column-tabbed-display;
 
-        "Print".action.screenshot = {show-pointer = false;};
-        "Ctrl+Print".action.screenshot-screen = {show-pointer = false;};
+        "Print".action.screenshot = {
+          show-pointer = false;
+        };
+        "Ctrl+Print".action.screenshot-screen = {
+          show-pointer = false;
+        };
 
         "Mod+Escape" = {
           allow-inhibiting = false;

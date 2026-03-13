@@ -2,7 +2,7 @@
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
 
-    monitor = ", prefered, auto, 2.13";
+    monitor = ", 3840x2400@60, auto, auto";
     exec-once = [
       #"swww-daemon"
       #"waybar"
@@ -11,8 +11,11 @@
     ];
 
     env = [
-      "XCURSOR_SIZE,24"
-      "HYPRCURSOR_SIZE,24"
+      "XCURSOR_SIZE,30"
+      "HYPRCURSOR_SIZE,30"
+      "QS_RENDER_SOFTWARE=0"
+      "QS_SCENE_DEVICE=vulkan"
+
     ];
 
     general = {
@@ -33,7 +36,7 @@
     };
 
     decoration = {
-      rounding = 20;
+      rounding = 10;
       rounding_power = 2;
 
       active_opacity = 1.0;
@@ -123,7 +126,8 @@
 
     bind = [
       "SUPER, Return, exec, kitty"
-      "SUPER, Space, exec, fuzzel"
+      #     "SUPER, Space, exec, fuzzel"
+      "Super, Space, exec, noctalia-shell ipc call launcher toggle" # noctalia shell only
       "SUPER, code:24, killactive"
       "SUPER SHIFT, A, forcekillactive"
       "SUPER SHIFT, Escape, exec, wlogout"

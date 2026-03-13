@@ -17,8 +17,7 @@
     ./fish/fish.nix
     ./sway/sway.nix
     ./helix/helix.nix
-    inputs.noctalia.homeModules.default
-    ./noctalia/noctalia.nix
+    ./dms/dms.nix
     #./caelestiashell/cealestia.nix
     #inputs.caelestia-shell.homeManagerModules.default
   ];
