@@ -2,12 +2,13 @@
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
 
-    monitor = ", 3840x2400@60, auto, auto";
+    monitor = ", 1920x1200@60, auto, 1";
     exec-once = [
-      #"swww-daemon"
-      #"waybar"
+      "swww-daemon"
+      "waybar"
       "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-      "noctalia-shell" # Only on nix !!
+      #"noctalia-shell" # Only on nix !!
+      "linux-wallpaper-engine"
     ];
 
     env = [
@@ -21,7 +22,7 @@
     general = {
       gaps_in = 5;
       gaps_out = 10;
-      border_size = 0;
+      border_size = 2;
 
       resize_on_border = false;
 
@@ -36,11 +37,11 @@
     };
 
     decoration = {
-      rounding = 10;
+      rounding = 20;
       rounding_power = 2;
 
       active_opacity = 1.0;
-      inactive_opacity = 0.9;
+      inactive_opacity = 1.0;
 
       shadow = {
         enabled = true;
@@ -49,7 +50,7 @@
       };
 
       blur = {
-        enabled = true;
+        enabled = false;
         size = 3;
         passes = 2;
         ignore_opacity = true;
@@ -126,8 +127,8 @@
 
     bind = [
       "SUPER, Return, exec, kitty"
-      #     "SUPER, Space, exec, fuzzel"
-      "Super, Space, exec, noctalia-shell ipc call launcher toggle" # noctalia shell only
+      "SUPER, Space, exec, rofi -show drun"
+      #"Super, Space, exec, noctalia-shell ipc call launcher toggle" # noctalia shell only
       "SUPER, code:24, killactive"
       "SUPER SHIFT, A, forcekillactive"
       "SUPER SHIFT, Escape, exec, wlogout"
@@ -137,12 +138,19 @@
       "SUPER, P, pseudo, # dwindle"
       "SUPER, J, togglesplit, # dwindle"
       "SUPER Shift, F, fullscreen"
+      "SUPER SHIFT, K, exec, pkill linux-wallpaper" # use for killing the wallpaper engine process if the loss of performance are to big
+      "Super Shift, D, exec, vesktop"
+      "Super, code:52, exec, linux-wallpaper-engine"
+      "Super Shift, code:58, exec, deezer-enhanced"
 
       #TUI
       "SUPER, I, exec, kitty --title ConfigTUI -e impala"
-      "SUPER, code:47, exec, kitty --title ConfigTUI -e wiremix"
+      "SUPER, code:58, exec, kitty --title ConfigTUI -e wiremix"
       "SUPER, B, exec, kitty --title ConfigTUI -e bluetui"
-      "SUPER Alt, Space, exec,  kitty --title ConfigTUI -e wallselector"
+      "SUPER Shift, W, exec,  kitty --title ConfigTUI -e wallselector"
+      "Super, D, exec, kitty discordo"
+      #"Super Alt, code:58, exec, kitty --title FancyCava -e cava"
+      #"Super Alt, K, exec, pkill cava"
 
       #Move focus
       "SUPER, left, movefocus, l"
@@ -203,6 +211,10 @@
       ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
       ",XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+"
       ",XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-"
+      ",XF86AudioPlay, exec, playerctl play-pause"
+      ",XF86AudioStop, exec, playerctl stop"
+      ",XF86AudioPrev, exec, playerctl pervious"
+      ",XF86AudioNext, exec, playerctl next"
 
       #workspaces
       "SUPER Ctrl, code:112, movetoworkspace, e-1"
@@ -236,8 +248,9 @@
 
     windowrule = [
       "float yes, move 20 monitor_h-120, match:class hyprland-run"
-      "float yes, size 350 200, match:class zen, match:title ^Pictures-in-Pictures$"
+      "float yes, size 350 200, match:class zen, match:title ^Pictures in pictures$"
       "float yes, size 800 600, match:class kitty, match:title ConfigTUI"
+      #"float yes, size 1000 100, no_focus yes, opacity 0.7, match:class kitty, match:title FancyCava"
     ];
   };
 }

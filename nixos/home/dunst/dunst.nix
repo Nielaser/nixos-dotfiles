@@ -12,7 +12,7 @@
         width = 400;
         height = 400;
         origin = "top-left";
-        offset = "10x20";
+        offset = "10x10";
         scale = 0;
         notification_limit = 4;
         progress_bar = true;
@@ -45,7 +45,7 @@
         always_run_scripts = true;
         title = "Dunst";
         class = "Dunst";
-        corner_radius = 0;
+        corner_radius = 20;
         ignore_dbusclose = false;
         force_xwayland = false;
         force_xinerama = false;
@@ -58,26 +58,26 @@
         highlight = "#${config.lib.stylix.colors.base01}";
       };
 
-      urgency_low = {
+      urgency_low = lib.mkForce {
         timeout = 3;
-        #background = "#${config.lib.stylix.colors.base00}";
-        #foreground = "#${config.lib.stylix.colors.base05}";
-        #highlight = "#${config.lib.stylix.colors.base06}";
+        background = "#${config.lib.stylix.colors.base00}";
+        foreground = "#${config.lib.stylix.colors.base05}";
+        highlight = "#${config.lib.stylix.colors.base06}";
         };
 
-      urgency_normal = {
+      urgency_normal = lib.mkForce{
+        timeout = 3;
+        background = "#${config.lib.stylix.colors.base00}";
+        foreground = "#${config.lib.stylix.colors.base05}";
+        highlight = "#${config.lib.stylix.colors.base06}";
+        };
+
+      urgency_critical = lib.mkForce{
         timeout = 6;
-        #background = "#${config.lib.stylix.colors.base00}";
-        #foreground = "#${config.lib.stylix.colors.base05}";
-        #highlight = "#${config.lib.stylix.colors.base06}";
-        };
-
-      urgency_critical = {
-        timeout = 12;
-        #background = "#${config.lib.stylix.colors.base00}";
-        #foreground = "#${config.lib.stylix.colors.base05}";
-        #highlight = "#${config.lib.stylix.colors.base06}";
-        };
+        background = "#${config.lib.stylix.colors.base00}";
+        foreground = "#${config.lib.stylix.colors.base05}";
+        highlight = "#${config.lib.stylix.colors.base06}";
+      };
     };
   };
 }

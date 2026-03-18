@@ -3,7 +3,11 @@
   lib,
   vim,
   ...
-}: {
+}: 
+let
+  sources = import ./npins;
+in
+{
   programs.nvf = {
     enable = true;
     defaultEditor = true;
@@ -20,17 +24,31 @@
 
 
         
-        vim.keymaps = [
-          { key = "^i";
+        keymaps = [
+          { key = "<C-i>";
             mode = [ "n" "i" "v" ];
-            action = ":lua vim.diagnostic.open_float()";
+            action = ":lua vim.diagnostic.open_float()<CR>";
             desc = "Show line diagnostic";
+          }
+
+          { key = "<C-s>";
+            mode = [ "n" "i" "v" ];
+            action = ":w<CR>";
+            desc = "save";
           }
         ];
 
         startPlugins = [
-          "nvim-telescope"
-          "telescope-zoxide"
+          "base16"
+          "colorful-menu-nvim"
+          "neocord"
+          "aerial-nvim"
+          "which-key-nvim"
+          "nvim-autopairs"
+          "dashboard-nvim"
+          #import with pkgs
+          pkgs.vimPlugins.telescope-zoxide
+
         ];
         options = {
           tabstop = 2;
@@ -43,11 +61,11 @@
         autocomplete.nvim-cmp.enable = true;
         lsp = {
           enable = true;
-        };
-        languages = {
-          enableTreesitter = true;
-          enableFormat = true;
 
+        };
+       languages = {
+          enableFormat = true;
+          enableTreesitter = true;
           nix.enable = true;
           ts.enable = true;
           rust.enable = true;
@@ -58,6 +76,6 @@
           qml.enable = true;
         };
       };
-    };
+    };   
   };
 }

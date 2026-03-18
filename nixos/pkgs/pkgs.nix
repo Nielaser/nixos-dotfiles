@@ -18,10 +18,20 @@
     davinci-resolve
     image-roll
     ckan
+    qt6.qtsvg
+    kdePackages.qtimageformats
+    
+    #wallpaper-engine
+    inputs.linux-wallpaper-engine.packages.${pkgs.stdenv.hostPlatform.system}.default
+    linux-wallpaperengine
+    
+    prismlauncher
+    obs-studio
     kdePackages.filelight
     kdePackages.kdeconnect-kde
     starship
     grc
+    tor-browser
     fishPlugins.done
     fishPlugins.fzf-fish
     fishPlugins.forgit

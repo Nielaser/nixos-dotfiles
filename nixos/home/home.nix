@@ -20,6 +20,8 @@
     inputs.dms.homeModules.dank-material-shell
     ./dms/dms.nix
     ./rofi/rofi.nix
+    ./cava/cava.nix
+    ./i3/i3.nix
   ];
 
   home.file = {

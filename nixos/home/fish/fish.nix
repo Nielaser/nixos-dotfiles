@@ -25,7 +25,8 @@
       update="sudo nixos-rebuild switch --flake ~/dotfiles/nixos";
       cd="z";
       add = "git add .";
-      upgrade = "sudo nix-channel --update";
+      upgrade = "sudo nix flake update";
+      garbage = "nix-collect-garbage --delete-older-than 3d";
     };
   };
 }

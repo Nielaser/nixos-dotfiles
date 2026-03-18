@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Unsorted Horror
+Comment=Play this game on Steam
+Exec=steam steam://rungameid/2433730
+Icon=steam_icon_2433730
+Terminal=false
+Type=Application
+Categories=Game;

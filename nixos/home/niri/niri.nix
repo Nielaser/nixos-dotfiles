@@ -100,12 +100,12 @@
       binds = with config.lib.niri.actions; {
         "Mod+Shift+Colon".action = show-hotkey-overlay;
         "Mod+Return".action.spawn = "kitty";
-        #"Mod+Space".action.spawn = "fuzzel";
-        "Mod+Space".action.spawn-sh = "noctalia-shell ipc call launcher toggle"; # noctali only
+        "Mod+Space".action.spawn-sh = "rofi -show drun";
+        #"Mod+Space".action.spawn-sh = "noctalia-shell ipc call launcher toggle"; # noctali only
         "Mod+Alt+L".action.spawn = "swaylock";
 
-        #"Mod+Shift+W".action.spawn-sh = "kitty --title ConfigTUI -e wallselector";
-        "Mod+SHift+W".action.spawn-sh = "noctalia-shell ipc call wallpaper toggle";
+        "Mod+Shift+W".action.spawn-sh = "kitty --title ConfigTUI -e wallselector";
+        #"Mod+SHift+W".action.spawn-sh = "noctalia-shell ipc call wallpaper toggle";
         "Mod+E".action.spawn-sh = "kitty -e yazi";
         "Mod+Alt+E".action.spawn = "nautilus";
         "Mod+D".action.spawn-sh = "kitty -e discordo";

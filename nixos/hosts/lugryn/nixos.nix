@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }:
 {
@@ -26,13 +27,16 @@
     "nix-command"
     "flakes"
   ];
+  #not enought buffer and /nix/store size \_•-•_/
+  nix.settings.download-buffer-size = 524288000;
+  systemd.services.nix-daemon.serviceConfig.LimitNOFILE = lib.mkForce 1048576;
 
   environment = {
     shells = [ pkgs.fish ];
     variables = {
-      EDITOR = "vim";
-      SYSTEMD_EDITOR = "vim";
-      VISUAL = "vim";
+      EDITOR = "hx";
+      SYSTEMD_EDITOR = "hx";
+      VISUAL = "hx";
     };
   };
 
@@ -53,6 +57,13 @@
     shell = pkgs.fish;
   };
 
+  #font
+  fonts.fontconfig = {
+    defaultFonts = {
+      monospace = [ "DepartureMono Nerd Font Mono" ];
+      sansSerif = [ "DepartureMono Nerd Font" ]; # It's a mono font, but this helps fallbacks
+    };
+  };
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -76,7 +87,7 @@
 
   networking.wireless.enable = false;
   networking.networkmanager.enable = false;
-  networking.networkmanager.wifi.backend = "iwd";
+  #networking.networkmanager.wifi.backend = "iwd";
   networking.wireless.iwd.enable = true;
   networking.wireless.iwd.settings = {
     Ipv6 = {
@@ -85,6 +96,17 @@
     Settings = {
       AutoConnect = true;
     };
+  };
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      8002
+      8003
+    ];
+    allowedUDPPorts = [
+      8002
+      8003
+    ];
   };
 
   # Set your time zone.
@@ -106,11 +128,19 @@
   };
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "fr, us";
-    options = "grp:caps_toggle";
-    variant = "";
+  services.xserver = {
+    xkb = {
+      layout = "fr, us";
+      options = "grp:caps_toggle";
+      variant = "";
+    };
+
+    #i3
+    windowManager.i3.enable = true;
   };
+  #i3
+  security.pam.services.i3lock.enable = true;
+  services.displayManager.defaultSession = "hyprland";
 
   # Configure console keymap
   #console.keyMap = "fr";
@@ -153,6 +183,7 @@
     libratbag
     piper
     gamescope
+    app2unit
   ];
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
@@ -232,7 +263,7 @@
   services.flatpak.enable = true;
   programs.hyprland.enable = true;
   programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-
+  programs.kdeconnect.enable = true;
   services.hardware.openrgb.enable = true;
   services.hardware.openrgb.package = pkgs.openrgb-with-all-plugins;
 

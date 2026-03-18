@@ -1,12 +1,21 @@
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: {
   programs.rofi = {
     enable = true;
-    theme = "sidebar";
-    font = "DepartureMono Nerd Font Mono";
-    modes = [ "drun" "run" "window" "ssh" ];
+    font = lib.mkForce "DepartureMono Nerd Font Mono";
+    modes = ["drun" "run" "window" "ssh"];
     extraConfig = {
       show-icons = true;
-  };
+    };
 
+    theme = {
+      inputbar = {
+        margin = 10;
+      };
+    };
   };
 }

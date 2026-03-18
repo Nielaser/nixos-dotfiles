@@ -49,19 +49,22 @@
     };
 
     #caelestia-shell
-    #caelestia-shell = {
-    # url = "github:caelestia-dots/shell";
-    #inputs.nixpkgs.follows = "nixpkgs";
-    #};
-
-    #noctalia
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.noctalia-qs.follows = "noctalia-qs";
+    caelestia-shell = {
+     url = "github:caelestia-dots/shell";
+    inputs.nixpkgs.follows = "nixpkgs";
+      inputs.quickshell.follows = "quickshell";
     };
-    noctalia-qs = {
-      url = "github:noctalia-dev/noctalia-qs";
+
+    #dms
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.quickshell.follows = "quickshell";
+    };
+
+    #linux-wallpaperengine gui
+    linux-wallpaper-engine = {
+      url = "github:jagrat7/linux-wallpaper-engine";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -92,6 +95,7 @@
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
+      
           stylix.nixosModules.stylix
           ./hosts/lugryn/nixos.nix
           inputs.home-manager.nixosModules.default

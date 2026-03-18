@@ -8,8 +8,8 @@
       enable_audio_bell = false;
       mouse_hide_wait = "-1.0";
       window_padding_width = 10;
-      background_opacity = "0.9";
-      background_blur = 5;
+      background_opacity = "1";
+      background_blur = 0;
       font_family = "DepartureMono Nerd Font Mono";
       bold_font = "auto";
       italic_font = "auto";
