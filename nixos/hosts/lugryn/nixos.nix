@@ -174,6 +174,7 @@
     openssl
     zlib
     glib
+    inputs.caelestia-shell.packages.x86_64-linux.default
     stdenv.cc.cc
     libxml2
     libx11
@@ -213,6 +214,9 @@
     fontconfig
     freetype
     libx11
+    wayland
+    libxkbcommon
+    libGL
   ];
 
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];

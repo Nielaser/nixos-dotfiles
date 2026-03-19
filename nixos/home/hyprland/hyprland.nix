@@ -5,9 +5,11 @@
     monitor = ", 1920x1200@60, auto, 1";
     exec-once = [
       "swww-daemon"
+
       "waybar"
       "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       #"noctalia-shell" # Only on nix !!
+      #"caelestia-shell"
       "linux-wallpaper-engine"
     ];
 
@@ -60,10 +62,10 @@
     };
 
     workspace = [
-      "1, layout:scrolling"
-      "2, layout:scrolling"
+      "1, layout:dwindle"
+      "2, layout:dwindle"
       "3, layout:scrolling"
-      "4, layout:dwindle"
+      "4, layout:scrolling"
       "5, layout:dwindle"
       "6, layout:dwindle"
       "7, layout:master"
@@ -130,7 +132,7 @@
       "SUPER, Space, exec, rofi -show drun"
       #"Super, Space, exec, noctalia-shell ipc call launcher toggle" # noctalia shell only
       "SUPER, code:24, killactive"
-      "SUPER SHIFT, A, forcekillactive"
+      "SUPER SHIFT, code:24, forcekillactive"
       "SUPER SHIFT, Escape, exec, wlogout"
       "SUPER, E, exec, kitty -e yazi"
       "SUPER SHIFT, E, exec, kitty -e superfile"

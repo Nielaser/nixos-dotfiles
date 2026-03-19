@@ -20,11 +20,11 @@
     ckan
     qt6.qtsvg
     kdePackages.qtimageformats
-    
+
     #wallpaper-engine
     inputs.linux-wallpaper-engine.packages.${pkgs.stdenv.hostPlatform.system}.default
     linux-wallpaperengine
-    
+
     prismlauncher
     obs-studio
     kdePackages.filelight
@@ -95,5 +95,7 @@
     wlr-which-key
     whatsapp-electron
     mariadb
+    libreoffice
+    fragments
   ];
 }

@@ -50,9 +50,8 @@
 
     #caelestia-shell
     caelestia-shell = {
-     url = "github:caelestia-dots/shell";
-    inputs.nixpkgs.follows = "nixpkgs";
-      inputs.quickshell.follows = "quickshell";
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     #dms
@@ -95,7 +94,7 @@
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-      
+
           stylix.nixosModules.stylix
           ./hosts/lugryn/nixos.nix
           inputs.home-manager.nixosModules.default
