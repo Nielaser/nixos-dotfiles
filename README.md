@@ -6,4 +6,4 @@ so if the files in "config/..." are a bit messy it's normal,
 the original one are the .backup for the original config or in "nixos/home/..." for the one writed in nix for home manager.
 have fun looking into my dotfiles
 
-le repo sera public jusqu'a mai-juin 2026
+I just switch back to arch so this repo should is only for nixos and is discontinued for now...
