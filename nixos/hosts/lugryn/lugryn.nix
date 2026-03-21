@@ -185,6 +185,7 @@
     piper
     gamescope
     app2unit
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
@@ -223,9 +224,9 @@
 
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+    remotePlay.openFirewall = true; #Steam Remote Play
+    dedicatedServer.openFirewall = true; #Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; #Steam Local Network Game Transfers
   };
   services.dbus.enable = true;
   services.dbus.packages = [
@@ -233,9 +234,9 @@
     pkgs.xdg-desktop-portal-gtk
   ];
   xdg.mime.defaultApplications = {
-    "text/html" = "vivaldi.desktop"; # or google-chrome.desktop, etc.
-    "x-scheme-handler/http" = "vivaldi.desktop";
-    "x-scheme-handler/https" = "vivaldi.desktop";
+    "text/html" = "zen-browser.desktop";
+    "x-scheme-handler/http" = "zen-browser.desktop";
+    "x-scheme-handler/https" = "zen-browser.desktop";
   };
 
   xdg.portal = {

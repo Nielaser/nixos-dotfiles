@@ -91,12 +91,12 @@
           modules = [ ./modules/nvf/nvf.nix ];
         }).neovim;
 
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.lugryn = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
 
           stylix.nixosModules.stylix
-          ./hosts/lugryn/nixos.nix
+          ./hosts/lugryn/lugryn.nix
           inputs.home-manager.nixosModules.default
           nvf.nixosModules.default
         ];

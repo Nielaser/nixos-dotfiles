@@ -26,11 +26,12 @@
 
     shellAliases = {
       ls = "exa -l";
-      update = "sudo nixos-rebuild switch --flake ~/dotfiles/nixos";
+      update = "sudo nixos-rebuild switch --flake ~/nixos-:dotfiles/nixos";
       cd = "z";
       add = "git add .";
       upgrade = "sudo nix flake update";
       garbage = "nix-collect-garbage --delete-older-than 3d";
+      spf = "superfile";
     };
   };
 }
